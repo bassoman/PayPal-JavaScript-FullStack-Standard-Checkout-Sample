@@ -3,9 +3,13 @@
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PayPal JS SDK Standard Integration</title>
+    <title>CARC Paypal</title>
   </head>
   <body>
+
+    <p><label for="duesAmount">Dues: </label><input type="text" id="duesAmount" onchange="copyFldFunc(this)"></input></p>
+    <p><label for="copyFld">Copied: </label><input type="text" id="copyFld"></input></p>
+
     <div id="paypal-button-container"></div>
     <p id="result-message"></p>
     <!-- Replace the "test" client-id value with your client-id -->

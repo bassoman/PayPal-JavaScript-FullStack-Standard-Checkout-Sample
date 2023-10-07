@@ -131,6 +131,7 @@ async function handleResponse(response) {
 app.post("/api/orders", async (req, res) => {
   try {
     // use the cart information passed from the front-end to calculate the order amount detals
+    console.log("MY TEST: ",req.body);
     const { cart } = req.body;
     const { jsonResponse, httpStatusCode } = await createOrder(cart);
     res.status(httpStatusCode).json(jsonResponse);

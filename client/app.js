@@ -18,7 +18,7 @@ window.paypal
             cart: [
               {
                 id: "Dues",
-                quantity: "20",
+                quantity: document.querySelector("#copyFld").value,
               },
             ],
           }),
@@ -96,4 +96,9 @@ window.paypal
 function resultMessage(message) {
   const container = document.querySelector("#result-message");
   container.innerHTML = message;
+}
+
+function copyFldFunc(input1) {
+  var input2 = document.getElementById('copyFld');
+  input2.value = input1.value;
 }
