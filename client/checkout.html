@@ -1,19 +1,79 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CARC Paypal</title>
-  </head>
-  <body>
 
-    <p><label for="duesAmount">Dues: </label><input type="text" id="duesAmount" onchange="copyFldFunc(this)"></input></p>
-    <p><label for="copyFld">Copied: </label><input type="text" id="copyFld"></input></p>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CARC Paypal</title>
+</head>
 
-    <div id="paypal-button-container"></div>
-    <p id="result-message"></p>
-    <!-- Replace the "test" client-id value with your client-id -->
-    <script src="https://www.paypal.com/sdk/js?client-id=AfCdrJWhUY4jCGKxamdGyFCmbyDH-WXEtygBpCK631ogaD-ex0ErZqz12PsVsbYplbfnywAGDOAJWDlz&components=buttons&enable-funding=venmo" data-sdk-integration-source="integrationbuilder_sc"></script>
-    <script src="app.js"></script>
-  </body>
+<body>
+
+  <p>
+    <label for="dues">Dues: </label>
+    <input type="text" id="dues" value="0" onchange="computeAmount(this)"></input>
+  </p>
+  <p>
+    <label for="donation">Donation: </label>
+    <input type="text" id="donation" value="0" onchange="computeAmount(this)"></input>
+  </p>
+  <p>
+    <label for="amount">Total Amount: </label>
+    <input type="text" id="amount" value="0" readonly></input>
+  </p>
+
+  <table width="50%"">
+    <tr>
+      <td colspan=2>
+        <fieldset style="background: inherit;  width: 100%" ;>
+          <legend style="text-align: left">Paypal Details</legend>
+          <div id="fieldShield">
+            <h3>Dues Renewal form for the Coastside Amateur Radio Club</h3>
+            <p style="text-align: left">
+              Currently, the basic membership fee is $20.00/year for the primary
+              membership in a household. Additional members in a household
+              are $3.00/year each.
+
+            <p style="text-align: left">
+              For Associate (unlicensed) members, enter
+              the first initial and last name of the Associate as a simple
+              text string (e.g. J_SMITH) with no space.
+
+            <p style="text-align: left">
+              If you are a new member, your membership fee for the current year
+              will be pro-rated. The month you are joining will be determined
+              from the form submission date. Please check the box below if you
+              are a new member.
+
+
+            <p style="text-align: left">
+              <label for="NewMember">NewMember?
+                <input type="checkbox" id="newchecked" onclick="newmember_change()">
+              </label>
+
+            <p style="text-align: left">
+              Paypal charges a transaction fee of 3.49% plus a base of 49¢
+              for the use of their service. This form calculates that fee and
+              allows members to offset this fee when they are paying their dues.
+              For each transaction, the form calculates the amount estimated to
+              be received by the club and the amount estimated to be received
+              by PayPal, as well as the total amount of the transaction.</p>
+
+            <p style="text-align: left">
+              Please Check Below to select which year(s) you wish to renew for.
+              Each checked box adds one annual fee when they are paying their dues.</p>
+            <div id="input-pick-years"></div>
+    </tr>
+  </table>
+
+
+  <div id="paypal-button-container"></div>
+  <p id="result-message"></p>
+  <!-- Replace the "test" client-id value with your client-id -->
+  <script
+    src="https://www.paypal.com/sdk/js?client-id=AfCdrJWhUY4jCGKxamdGyFCmbyDH-WXEtygBpCK631ogaD-ex0ErZqz12PsVsbYplbfnywAGDOAJWDlz&components=buttons&enable-funding=venmo"
+    data-sdk-integration-source="integrationbuilder_sc"></script>
+  <script src="app.js"></script>
+</body>
+
 </html>

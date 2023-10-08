@@ -1,3 +1,13 @@
+// create dues years selector element
+var jkl_render = function (template, node) {
+	node.innerHTML = template;
+};
+
+var generate_years = function () {
+  return "****checkbox element of years from this year plus 5****";
+};
+jkl_render(generate_years(), document.querySelector('#input-pick-years'));
+
 window.paypal
   .Buttons({
     style: {
@@ -17,8 +27,8 @@ window.paypal
           body: JSON.stringify({
             cart: [
               {
-                id: "Dues",
-                quantity: document.querySelector("#copyFld").value,
+                id: "Payment",
+                quantity: document.querySelector("#amount").value,
               },
             ],
           }),
@@ -98,7 +108,18 @@ function resultMessage(message) {
   container.innerHTML = message;
 }
 
-function copyFldFunc(input1) {
-  var input2 = document.getElementById('copyFld');
-  input2.value = input1.value;
+function computeAmount(input) {
+  // console.log(input1.id);
+  switch(input.id) {
+    case 'dues':
+      // code block
+      break;
+    case 'donation':
+      // code block
+      break;
+    default:
+      // code block
+  }
+  var input2 = document.getElementById('amount');
+  input2.value = parseFloat(document.getElementById('dues').value) + parseFloat(document.getElementById('donation').value);
 }
