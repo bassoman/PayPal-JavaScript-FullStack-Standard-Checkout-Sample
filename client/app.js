@@ -4,11 +4,16 @@ var jkl_render = function (template, node) {
 };
 
 var generate_years = function () {
+  // let newMember = document.getElementById('newchecked').checked;
+  // let cDues = 20;
   let currentYear = new Date().getFullYear();
-  let ele = '<label for="dues-thru">Pay dues through year: </label><select name="dues-thru" id="dues-thru">';
+  let ele = '<label for="dues-thru">Pay dues through year: </label><select name="dues-thru" id="dues-thru" onchange="computeAmount(this)">';
+  ele = ele + "<option value='{\"year\": 0, \"dues\": 0}'>Select</option>";
+  yr = parseInt(currentYear)
   for (y of [0, 1, 2, 3, 4]) {
-    yr = parseInt(currentYear)
-    ele = ele + '<option value="'+ (yr+parseInt(y)) +'">'+ (yr+parseInt(y)) +'</option>'
+    // console.log(newMember);
+    // if (newMember) { cDues = 10 } else { cDues = 20 };
+    ele = ele + ''.concat("<option value='{\"year\": ",(yr+parseInt(y)),", \"dues\": ",20*(y+1),"}'>",(yr+parseInt(y)),"</option>");
   }
   ele = ele + '</select>'
   return ele;
@@ -124,9 +129,19 @@ function computeAmount(input) {
     case 'donation':
       // code block
       break;
+    case 'dues-thru':
+        // code block
+        // console.log(document.getElementById('dues-thru').value)
+        break;
     default:
       // code block
   }
-  var input2 = document.getElementById('amount');
-  input2.value = parseFloat(document.getElementById('dues').value) + parseFloat(document.getElementById('donation').value);
+  var amt = document.getElementById('amount');
+  amt.value = parseFloat(document.getElementById('dues').value) + parseFloat(document.getElementById('donation').value);
+  if (amt.value > 0) {
+    document.getElementById('paypal-button-container').hidden = false
+  } else {
+    document.getElementById('paypal-button-container').hidden = true
+  }
+  console.log(JSON.parse(document.getElementById('dues-thru').value))
 }

@@ -47,8 +47,8 @@
 
 
             <p style="text-align: left">
-              <label for="NewMember">NewMember?
-                <input type="checkbox" id="newchecked" onclick="newmember_change()">
+              <label for="newchecked">NewMember?
+                <input type="checkbox" id="newchecked">
               </label>
 
             <p style="text-align: left">
@@ -62,13 +62,13 @@
             <p style="text-align: left">
               Please Check Below to select which year(s) you wish to renew for.
               Each checked box adds one annual fee when they are paying their dues.</p>
-              
+
             <div id="input-pick-years"></div>
     </tr>
   </table>
 
 
-  <div id="paypal-button-container"></div>
+  <div id="paypal-button-container" hidden></div>
   <p id="result-message"></p>
   <!-- Replace the "test" client-id value with your client-id -->
   <script
