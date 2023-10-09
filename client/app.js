@@ -4,7 +4,14 @@ var jkl_render = function (template, node) {
 };
 
 var generate_years = function () {
-  return "****checkbox element of years from this year plus 5****";
+  let currentYear = new Date().getFullYear();
+  let ele = '<label for="dues-thru">Pay dues through year: </label><select name="dues-thru" id="dues-thru">';
+  for (y of [0, 1, 2, 3, 4]) {
+    yr = parseInt(currentYear)
+    ele = ele + '<option value="'+ (yr+parseInt(y)) +'">'+ (yr+parseInt(y)) +'</option>'
+  }
+  ele = ele + '</select>'
+  return ele;
 };
 jkl_render(generate_years(), document.querySelector('#input-pick-years'));
 
