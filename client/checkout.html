@@ -23,44 +23,44 @@
         <fieldset style="background: inherit;  width: 100%" ;>
           <legend style="text-align: left">Paypal Details</legend>
           <div id="fieldShield">
-            <h3>Dues Renewal form for the Coastside Amateur Radio Club</h3>
+            <h3>Dues Renewal and Donation form for the Coastside Amateur Radio Club</h3>
             <p style="text-align: left">
-              Currently, the basic membership fee is $20.00/year for the primary
-              membership in a household. Additional members in a household
-              are $3.00/year each.
+              Currently, the Primary Membership fee is $<span id="primary-dues"></span>/year per
+              household. Additional family members in a household
+              can be included for $<span id="family-dues"></span>/year each.</p>
 
             <p style="text-align: left">
-              For Associate (unlicensed) members, enter
+              <s>For Associate (unlicensed) members, enter
               the first initial and last name of the Associate as a simple
-              text string (e.g. J_SMITH) with no space.
+              text string (e.g. J_SMITH) with no space.</s>
+            </p>
 
             <p style="text-align: left">
               If you are a new member, your primary membership fee for the current year
               will be pro-rated. The month you are joining will be determined
-              from the form submission date. Please check the box below if you
-              are a new member.
+              from this form submission date. Please check the following box if you are a new member.
+            </p>
 
-
-            <p style="text-align: left">
+            <p style="margin-left: 25px;">
               <input type="checkbox" id="newchecked" onclick="computeAmount(this)"><label for="newchecked"> NewMember</label>
             </p>
 
             <p style="text-align: left">
-              Paypal charges a transaction fee of 3.49% plus a base of 49¢
+              Paypal charges a transaction fee of <span id="tnx-fee"></span>% plus a base of $<span id="service-use"></span>
               for the use of their service. This form calculates that fee and
               allows members to offset this fee when they are paying their dues.
               For each transaction, the form calculates the amount estimated to
               be received by the club and the amount estimated to be received
               by PayPal, as well as the total amount of the transaction.</p>
 
-              <p style="text-align: left">
+              <p  style="margin-left: 25px;">
                 <input type="checkbox" id="tnxfee" onclick="computeAmount(this)"><label for="tnxfee"> I would like to pay the transaction fee</label>
               </p>
   
               <p style="text-align: left">
               Please select below the year you would like to pay through.</p>
 
-            <div id="input-pick-years"></div>
+            <div id="input-pick-years" style="margin-left: 25px;"></div>
             <hr/>
             <p>
               <label for="amount">Total Amount: </label>

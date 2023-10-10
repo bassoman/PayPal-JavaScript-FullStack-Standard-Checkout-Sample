@@ -1,24 +1,25 @@
 // create dues years selector element
-var annualPrimaryDues = 20.0;
-var annualFamilyDues = 3;
+var annualPrimaryDues = 20.00;
+var annualFamilyDues = 3.00;
 var currentYear = new Date().getFullYear();
 var currentMonth = new Date().getMonth();
-var tnxfee = 0.0349;
+var tnxfee = 3.49;
 var serviceUse = 0.49;
 
 var jkl_render = function (template, node) {
 	node.innerHTML = template;
 };
 
+jkl_render(annualPrimaryDues.toFixed(2), document.querySelector('#primary-dues'));
+jkl_render(annualFamilyDues.toFixed(2), document.querySelector('#family-dues'));
+jkl_render(tnxfee.toFixed(2), document.querySelector('#tnx-fee'));
+jkl_render(serviceUse.toFixed(2), document.querySelector('#service-use'));
+
 var generate_years = function () {
-  // let newMember = document.getElementById('newchecked').checked;
-  // let cDues = 20;
-  let ele = '<label for="dues-thru">Pay dues through year: </label><select name="dues-thru" id="dues-thru" onchange="computeAmount(this)">';
+  let ele = '<label for="dues-thru">Pay Primary Dues through year: </label><select name="dues-thru" id="dues-thru" onchange="computeAmount(this)">';
   ele = ele + "<option value='{\"year\": 0, \"dues\": 0}'>Select</option>";
   yr = parseInt(currentYear)
   for (y of [0, 1, 2, 3, 4]) {
-    // console.log(newMember);
-    // if (newMember) { cDues = 10 } else { cDues = 20 };
     ele = ele + ''.concat("<option value='{\"year\": ",(yr+parseInt(y)),", \"dues\": ",annualPrimaryDues*(y+1),"}'>",(yr+parseInt(y)),"</option>");
   }
   ele = ele + '</select>'
@@ -150,9 +151,7 @@ function computeAmount(input) {
   }
   document.getElementById('amount').value = 0;
   var amt = 0;
-  // var amt = document.getElementById('amount');
   amt = JSON.parse(document.getElementById('dues-thru').value).dues;
-  //  + parseFloat(document.getElementById('donation').value);
 
   if (amt > 0) {
     document.getElementById('paypal-button-container').hidden = false
@@ -169,7 +168,7 @@ function computeAmount(input) {
   let payFee = document.getElementById('tnxfee').checked;
   if (amt > 0) {
     if (payFee) {
-      amt = amt + (tnxfee * amt) + serviceUse;
+      amt = (tnxfee/100+1) * amt + serviceUse;
     }
     document.getElementById('amount').value = amt.toFixed(2);
   }
