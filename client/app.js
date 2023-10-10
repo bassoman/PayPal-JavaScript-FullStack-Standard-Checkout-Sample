@@ -1,4 +1,11 @@
 // create dues years selector element
+var annualPrimaryDues = 20.0;
+var annualFamilyDues = 3;
+var currentYear = new Date().getFullYear();
+var currentMonth = new Date().getMonth();
+var tnxfee = .0349;
+var serviceUse = 0.49;
+
 var jkl_render = function (template, node) {
 	node.innerHTML = template;
 };
@@ -6,7 +13,6 @@ var jkl_render = function (template, node) {
 var generate_years = function () {
   // let newMember = document.getElementById('newchecked').checked;
   // let cDues = 20;
-  let currentYear = new Date().getFullYear();
   let ele = '<label for="dues-thru">Pay dues through year: </label><select name="dues-thru" id="dues-thru" onchange="computeAmount(this)">';
   ele = ele + "<option value='{\"year\": 0, \"dues\": 0}'>Select</option>";
   yr = parseInt(currentYear)
@@ -123,6 +129,12 @@ function resultMessage(message) {
 function computeAmount(input) {
   // console.log(input1.id);
   switch(input.id) {
+    case 'tnxfee':
+      // code block
+      break;
+    case 'newchecked':
+      // code block
+      break;
     case 'dues':
       // code block
       break;
@@ -137,11 +149,24 @@ function computeAmount(input) {
       // code block
   }
   var amt = document.getElementById('amount');
-  amt.value = parseFloat(document.getElementById('dues').value) + parseFloat(document.getElementById('donation').value);
+  amt.value = JSON.parse(document.getElementById('dues-thru').value).dues;
+  //  + parseFloat(document.getElementById('donation').value);
+
   if (amt.value > 0) {
     document.getElementById('paypal-button-container').hidden = false
   } else {
     document.getElementById('paypal-button-container').hidden = true
+  }
+  let newMember = document.getElementById('newchecked').checked;
+  if (newMember) {
+    var n = 12.0 - currentMonth;
+    console.log(n);
+    amt.value = amt.value - (n/12*annualPrimaryDues);
+  }
+
+  let payFee = document.getElementById('tnxfee').checked;
+  if (payFee) {
+    amt.value = parseFloat(amt.value).toFixed(2) + parseFloat(tnxfee*amt.value).toFixed(2) + parseFloat(serviceUse).toFixed(2);
   }
   console.log(JSON.parse(document.getElementById('dues-thru').value))
 }
