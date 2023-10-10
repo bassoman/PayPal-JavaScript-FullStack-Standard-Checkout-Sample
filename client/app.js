@@ -3,7 +3,7 @@ var annualPrimaryDues = 20.0;
 var annualFamilyDues = 3;
 var currentYear = new Date().getFullYear();
 var currentMonth = new Date().getMonth();
-var tnxfee = .0349;
+var tnxfee = 0.0349;
 var serviceUse = 0.49;
 
 var jkl_render = function (template, node) {
@@ -128,6 +128,7 @@ function resultMessage(message) {
 
 function computeAmount(input) {
   // console.log(input1.id);
+  document.getElementById('amount').value = 0;
   switch(input.id) {
     case 'tnxfee':
       // code block
@@ -148,11 +149,12 @@ function computeAmount(input) {
     default:
       // code block
   }
-  var amt = document.getElementById('amount');
-  amt.value = JSON.parse(document.getElementById('dues-thru').value).dues;
+  var amt = 0;
+  // var amt = document.getElementById('amount');
+  amt = JSON.parse(document.getElementById('dues-thru').value).dues;
   //  + parseFloat(document.getElementById('donation').value);
 
-  if (amt.value > 0) {
+  if (amt > 0) {
     document.getElementById('paypal-button-container').hidden = false
   } else {
     document.getElementById('paypal-button-container').hidden = true
@@ -161,12 +163,15 @@ function computeAmount(input) {
   if (newMember) {
     var n = 12.0 - currentMonth;
     console.log(n);
-    amt.value = amt.value - (n/12*annualPrimaryDues);
+    amt = amt - (n/12*annualPrimaryDues);
   }
 
   let payFee = document.getElementById('tnxfee').checked;
-  if (payFee) {
-    amt.value = parseFloat(amt.value).toFixed(2) + parseFloat(tnxfee*amt.value).toFixed(2) + parseFloat(serviceUse).toFixed(2);
+  if (amt > 0) {
+    if (payFee) {
+      amt = amt + (tnxfee * amt) + serviceUse;
+    }
+    document.getElementById('amount').value = amt.toFixed(2);
   }
-  console.log(JSON.parse(document.getElementById('dues-thru').value))
+  // console.log(amt.toFixed(2))
 }
