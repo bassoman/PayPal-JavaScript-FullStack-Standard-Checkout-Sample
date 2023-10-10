@@ -19,7 +19,7 @@ var generate_years = function () {
   for (y of [0, 1, 2, 3, 4]) {
     // console.log(newMember);
     // if (newMember) { cDues = 10 } else { cDues = 20 };
-    ele = ele + ''.concat("<option value='{\"year\": ",(yr+parseInt(y)),", \"dues\": ",20*(y+1),"}'>",(yr+parseInt(y)),"</option>");
+    ele = ele + ''.concat("<option value='{\"year\": ",(yr+parseInt(y)),", \"dues\": ",annualPrimaryDues*(y+1),"}'>",(yr+parseInt(y)),"</option>");
   }
   ele = ele + '</select>'
   return ele;
@@ -128,7 +128,6 @@ function resultMessage(message) {
 
 function computeAmount(input) {
   // console.log(input1.id);
-  document.getElementById('amount').value = 0;
   switch(input.id) {
     case 'tnxfee':
       // code block
@@ -149,6 +148,7 @@ function computeAmount(input) {
     default:
       // code block
   }
+  document.getElementById('amount').value = 0;
   var amt = 0;
   // var amt = document.getElementById('amount');
   amt = JSON.parse(document.getElementById('dues-thru').value).dues;
