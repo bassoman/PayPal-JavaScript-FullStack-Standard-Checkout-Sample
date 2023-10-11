@@ -12,12 +12,12 @@ var jkl_render = function (template, node) {
 
 const params = new URLSearchParams(document.location.search);
 var formData = {
-  "primaryDues": params.get("p1"),
-  "associateDues": params.get("p2"),
-  "repeaterDonation": params.get("p3"),
-  "digipeaterDonation": params.get("p4"),
-  "optionalFee": params.get("p5"),
-  "callsign": params.get("p6")
+  "primaryDues": params.get("P1"),
+  "associateDues": params.get("P2"),
+  "repeaterDonation": params.get("P3"),
+  "digipeaterDonation": params.get("P4"),
+  "optionalFee": params.get("P5"),
+  "callsign": params.get("P6")
 };
 document.querySelector('#primary-dues').value = formData.primaryDues;
 document.querySelector('#associate-dues').value = formData.associateDues;
@@ -145,48 +145,52 @@ function resultMessage(message) {
 
 function computeAmount(input) {
   // console.log(input1.id);
-  switch(input.id) {
-    case 'tnxfee':
-      // code block
-      break;
-    case 'newchecked':
-      // code block
-      break;
-    case 'dues':
-      // code block
-      break;
-    case 'donation':
-      // code block
-      break;
-    case 'dues-thru':
-        // code block
-        // console.log(document.getElementById('dues-thru').value)
-        break;
-    default:
-      // code block
-  }
+  // switch(input.id) {
+  //   case 'tnxfee':
+  //     // code block
+  //     break;
+  //   case 'newchecked':
+  //     // code block
+  //     break;
+  //   case 'dues':
+  //     // code block
+  //     break;
+  //   case 'donation':
+  //     // code block
+  //     break;
+  //   case 'dues-thru':
+  //       // code block
+  //       // console.log(document.getElementById('dues-thru').value)
+  //       break;
+  //   default:
+  //     // code block
+  // }
   document.getElementById('amount').value = 0;
   var amt = 0;
-  amt =+ JSON.parse(document.getElementById('dues-thru').value).dues;
-
+  // amt =+ JSON.parse(document.getElementById('dues-thru').value);
+  amt =+ formData.primaryDues;
+  amt =+ formData.associateDues;
+  amt =+ formData.repeaterDonation;
+  amt =+ formData.digipeaterDonation;
+  amt =+ formData.optionalFee;
   if (amt > 0) {
     document.getElementById('paypal-button-container').hidden = false
   } else {
     document.getElementById('paypal-button-container').hidden = true
   }
-  let newMember = document.getElementById('newchecked').checked;
-  if (newMember) {
-    var n = 12.0 - currentMonth;
-    console.log(n);
-    amt = amt - (n/12*annualPrimaryDues);
-  }
 
-  let payFee = document.getElementById('tnxfee').checked;
-  if (amt > 0) {
-    if (payFee) {
-      amt = (tnxfee/100+1) * amt + serviceUse;
-    }
-    document.getElementById('amount').value = amt.toFixed(2);
-  }
+  // let newMember = document.getElementById('newchecked').checked;
+  // if (newMember) {
+  //   var n = 12.0 - currentMonth;
+  //   console.log(n);
+  //   amt = amt - (n/12*annualPrimaryDues);
+  // }
+
+  // let payFee = document.getElementById('tnxfee').checked;
+  // if (amt > 0) {
+  //   if (payFee) {
+  //     amt = (tnxfee/100+1) * amt + serviceUse;
+  //   }
+  document.getElementById('amount').value = amt.toFixed(2);
   // console.log(amt.toFixed(2))
 }
