@@ -10,22 +10,38 @@ var jkl_render = function (template, node) {
 	node.innerHTML = template;
 };
 
-jkl_render(annualPrimaryDues.toFixed(2), document.querySelector('#primary-dues'));
-jkl_render(annualFamilyDues.toFixed(2), document.querySelector('#family-dues'));
-jkl_render(tnxfee.toFixed(2), document.querySelector('#tnx-fee'));
-jkl_render(serviceUse.toFixed(2), document.querySelector('#service-use'));
-
-var generate_years = function () {
-  let ele = '<label for="dues-thru">Pay Primary Dues through year: </label><select name="dues-thru" id="dues-thru" onchange="computeAmount(this)">';
-  ele = ele + "<option value='{\"year\": 0, \"dues\": 0}'>Select</option>";
-  yr = parseInt(currentYear)
-  for (y of [0, 1, 2, 3, 4]) {
-    ele = ele + ''.concat("<option value='{\"year\": ",(yr+parseInt(y)),", \"dues\": ",annualPrimaryDues*(y+1),"}'>",(yr+parseInt(y)),"</option>");
-  }
-  ele = ele + '</select>'
-  return ele;
+const params = new URLSearchParams(document.location.search);
+var formData = {
+  "primaryDues": params.get("p1"),
+  "associateDues": params.get("p2"),
+  "repeaterDonation": params.get("p3"),
+  "digipeaterDonation": params.get("p4"),
+  "optionalFee": params.get("p5"),
+  "callsign": params.get("p6")
 };
-jkl_render(generate_years(), document.querySelector('#input-pick-years'));
+document.querySelector('#primary-dues').value = formData.primaryDues;
+document.querySelector('#associate-dues').value = formData.associateDues;
+document.querySelector('#repeater-donation').value = formData.repeaterDonation;
+document.querySelector('#digipeater-donation').value = formData.digipeaterDonation;
+document.querySelector('#optional-fee').value = formData.optionalFee;
+document.querySelector('#callsign').value = formData.callsign;
+
+// jkl_render(annualPrimaryDues.toFixed(2), document.querySelector('#primary-dues'));
+// jkl_render(annualFamilyDues.toFixed(2), document.querySelector('#family-dues'));
+// jkl_render(tnxfee.toFixed(2), document.querySelector('#tnx-fee'));
+// jkl_render(serviceUse.toFixed(2), document.querySelector('#service-use'));
+
+// var generate_years = function () {
+//   let ele = '<label for="dues-thru">Pay Primary Dues through year: </label><select name="dues-thru" id="dues-thru" onchange="computeAmount(this)">';
+//   ele = ele + "<option value='{\"year\": 0, \"dues\": 0}'>Select</option>";
+//   yr = parseInt(currentYear)
+//   for (y of [0, 1, 2, 3, 4]) {
+//     ele = ele + ''.concat("<option value='{\"year\": ",(yr+parseInt(y)),", \"dues\": ",annualPrimaryDues*(y+1),"}'>",(yr+parseInt(y)),"</option>");
+//   }
+//   ele = ele + '</select>'
+//   return ele;
+// };
+// jkl_render(generate_years(), document.querySelector('#input-pick-years'));
 
 window.paypal
   .Buttons({
@@ -151,7 +167,7 @@ function computeAmount(input) {
   }
   document.getElementById('amount').value = 0;
   var amt = 0;
-  amt = JSON.parse(document.getElementById('dues-thru').value).dues;
+  amt =+ JSON.parse(document.getElementById('dues-thru').value).dues;
 
   if (amt > 0) {
     document.getElementById('paypal-button-container').hidden = false
