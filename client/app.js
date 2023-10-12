@@ -1,10 +1,10 @@
 // create dues years selector element
-var annualPrimaryDues = 20.00;
-var annualFamilyDues = 3.00;
-var currentYear = new Date().getFullYear();
-var currentMonth = new Date().getMonth();
-var tnxfee = 3.49;
-var serviceUse = 0.49;
+// var annualPrimaryDues = 20.00;
+// var annualFamilyDues = 3.00;
+// var currentYear = new Date().getFullYear();
+// var currentMonth = new Date().getMonth();
+// var tnxfee = 3.49;
+// var serviceUse = 0.49;
 
 var jkl_render = function (template, node) {
 	node.innerHTML = template;
