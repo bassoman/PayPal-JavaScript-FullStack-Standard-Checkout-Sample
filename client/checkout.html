@@ -5,32 +5,34 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>CARC Paypal</title>
+  <style>
+    label {display:inline-block;width:150px;text-align: right;}
+  </style>
 </head>
 
 <body>
-
   <p>
-    <label for="primary-dues">P1-primary dues: </label>
+    <label for="primary-dues">Primary Dues: </label>
     <input type="text" id="primary-dues" value="0" readonly></input>
   </p>
   <p>
-    <label for="associate-dues">P2-associate dues: </label>
+    <label for="associate-dues">Associate Dues: </label>
     <input type="text" id="associate-dues" value="0" readonly></input>
   </p>
   <p>
-    <label for="repeater-donation">P3-repeater donation: </label>
+    <label for="repeater-donation">Repeater Donation: </label>
     <input type="text" id="repeater-donation" value="0" readonly></input>
   </p>
   <p>
-    <label for="digipeater-donation">P4-digipeater donation: </label>
+    <label for="digipeater-donation">Digipeater Donation: </label>
     <input type="text" id="digipeater-donation" value="0" readonly></input>
   </p>
   <p>
-    <label for="optional-fee">P5-optional fee: </label>
+    <label for="optional-fee">Optional Fee: </label>
     <input type="text" id="optional-fee" value="0" readonly></input>
   </p>
   <p>
-    <label for="callsign">P6-callsign: </label>
+    <label for="callsign">Callsign: </label>
     <input type="text" id="callsign" value="0" readonly></input>
   </p>
   <p>
@@ -38,65 +40,11 @@
     <input type="text" id="amount" value="0" readonly></input>
   </p>
 
-  <!-- <p>
-    <label for="donation">Donation: </label>
-    <input type="text" id="donation" value="0" onchange="computeAmount(this)"></input>
-  </p> -->
-  <!-- <table width="50%"">
-    <tr>
-      <td colspan=2>
-        <fieldset style="background: inherit;  width: 100%" ;>
-          <legend style="text-align: left">Paypal Details</legend>
-          <div id="fieldShield">
-            <h3>Dues Renewal and Donation form for the Coastside Amateur Radio Club</h3>
-            <p style="text-align: left">
-              Currently, the Primary Membership fee is $<span id="primary-dues"></span>/year per
-              household. Additional family members in a household
-              can be included for $<span id="family-dues"></span>/year each.</p>
-
-            <p style="text-align: left">
-              <s>For Associate (unlicensed) members, enter
-              the first initial and last name of the Associate as a simple
-              text string (e.g. J_SMITH) with no space.</s>
-            </p>
-
-            <p style="text-align: left">
-              If you are a new member, your primary membership fee for the current year
-              will be pro-rated. The month you are joining will be determined
-              from this form submission date. Please check the following box if you are a new member.
-            </p>
-
-            <p style="margin-left: 25px;">
-              <input type="checkbox" id="newchecked" onclick="computeAmount(this)"><label for="newchecked"> NewMember</label>
-            </p>
-
-            <p style="text-align: left">
-              Paypal charges a transaction fee of <span id="tnx-fee"></span>% plus a base of $<span id="service-use"></span>
-              for the use of their service. This form calculates that fee and
-              allows members to offset this fee when they are paying their dues.
-              For each transaction, the form calculates the amount estimated to
-              be received by the club and the amount estimated to be received
-              by PayPal, as well as the total amount of the transaction.</p>
-
-              <p  style="margin-left: 25px;">
-                <input type="checkbox" id="tnxfee" onclick="computeAmount(this)"><label for="tnxfee"> I would like to pay the transaction fee</label>
-              </p>
-  
-              <p style="text-align: left">
-              Please select below the year you would like to pay through.</p>
-
-            <div id="input-pick-years" style="margin-left: 25px;"></div>
-            <hr/>
-            <p>
-              <label for="amount">Total Amount: </label>
-              <input type="text" id="amount" value="0" readonly></input>
-            </p>
-    </tr>
-  </table> -->
-
-
   <div id="paypal-button-container" hidden></div>
+  <button type="button" onClick="onCancel(this)">Cancel payment</button>
+
   <p id="result-message"></p>
+
   <!-- Replace the "test" client-id value with your client-id -->
   <script
     src="https://www.paypal.com/sdk/js?client-id=AfCdrJWhUY4jCGKxamdGyFCmbyDH-WXEtygBpCK631ogaD-ex0ErZqz12PsVsbYplbfnywAGDOAJWDlz&components=buttons&disable-funding=paylater&enable-funding=venmo"

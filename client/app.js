@@ -1,11 +1,3 @@
-// create dues years selector element
-// var annualPrimaryDues = 20.00;
-// var annualFamilyDues = 3.00;
-// var currentYear = new Date().getFullYear();
-// var currentMonth = new Date().getMonth();
-// var tnxfee = 3.49;
-// var serviceUse = 0.49;
-
 var jkl_render = function (template, node) {
 	node.innerHTML = template;
 };
@@ -19,11 +11,11 @@ var formData = {
   "optionalFee": params.get("P5"),
   "callsign": params.get("P6")
 };
-document.querySelector('#primary-dues').value = formData.primaryDues;
-document.querySelector('#associate-dues').value = formData.associateDues;
-document.querySelector('#repeater-donation').value = formData.repeaterDonation;
-document.querySelector('#digipeater-donation').value = formData.digipeaterDonation;
-document.querySelector('#optional-fee').value = formData.optionalFee;
+document.querySelector('#primary-dues').value = parseFloat(formData.primaryDues).toFixed(2);
+document.querySelector('#associate-dues').value = parseFloat(formData.associateDues).toFixed(2);
+document.querySelector('#repeater-donation').value = parseFloat(formData.repeaterDonation).toFixed(2);
+document.querySelector('#digipeater-donation').value = parseFloat(formData.digipeaterDonation).toFixed(2);
+document.querySelector('#optional-fee').value = parseFloat(formData.optionalFee).toFixed(2);
 document.querySelector('#callsign').value = formData.callsign;
 
 computeAmount();
@@ -128,14 +120,21 @@ window.paypal
             orderData,
             JSON.stringify(orderData, null, 2),
           );
+          // window.location.href = "https://coastsidearc.org/www.coastsidearc.org/paypalsuccess.php";
         }
       } catch (error) {
         console.error(error);
         resultMessage(
           `Sorry, your transaction could not be processed...<br><br>${error}`,
         );
+        // window.location.href = "https://coastsidearc.org/www.coastsidearc.org/paypalcancel.php";
       }
+      window.location.href = "https://coastsidearc.org/www.coastsidearc.org/paypalcancel.php";
     },
+    onCancel(data) {
+        // Show a cancel page, or return to cart
+        window.location.href = "https://coastsidearc.org/www.coastsidearc.org/paypalcancel.php";
+    }
   })
   .render("#paypal-button-container");
 
@@ -169,7 +168,6 @@ function computeAmount() {
   // }
   document.getElementById('amount').value = 0;
   var amt = 0;
-  // amt =+ JSON.parse(document.getElementById('dues-thru').value);
   amt = amt + parseFloat(formData.primaryDues);
   amt = amt + parseFloat(formData.associateDues);
   amt = amt + parseFloat(formData.repeaterDonation);
