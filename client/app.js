@@ -26,6 +26,8 @@ document.querySelector('#digipeater-donation').value = formData.digipeaterDonati
 document.querySelector('#optional-fee').value = formData.optionalFee;
 document.querySelector('#callsign').value = formData.callsign;
 
+computeAmount();
+
 // jkl_render(annualPrimaryDues.toFixed(2), document.querySelector('#primary-dues'));
 // jkl_render(annualFamilyDues.toFixed(2), document.querySelector('#family-dues'));
 // jkl_render(tnxfee.toFixed(2), document.querySelector('#tnx-fee'));
@@ -143,7 +145,7 @@ function resultMessage(message) {
   container.innerHTML = message;
 }
 
-function computeAmount(input) {
+function computeAmount() {
   // console.log(input1.id);
   // switch(input.id) {
   //   case 'tnxfee':
@@ -168,11 +170,12 @@ function computeAmount(input) {
   document.getElementById('amount').value = 0;
   var amt = 0;
   // amt =+ JSON.parse(document.getElementById('dues-thru').value);
-  amt =+ formData.primaryDues;
-  amt =+ formData.associateDues;
-  amt =+ formData.repeaterDonation;
-  amt =+ formData.digipeaterDonation;
-  amt =+ formData.optionalFee;
+  amt = amt + parseFloat(formData.primaryDues);
+  amt = amt + parseFloat(formData.associateDues);
+  amt = amt + parseFloat(formData.repeaterDonation);
+  amt = amt + parseFloat(formData.digipeaterDonation);
+  amt = amt + parseFloat(formData.optionalFee);
+  
   if (amt > 0) {
     document.getElementById('paypal-button-container').hidden = false
   } else {
