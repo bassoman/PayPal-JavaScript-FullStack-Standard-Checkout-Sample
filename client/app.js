@@ -20,22 +20,6 @@ document.querySelector('#callsign').value = formData.callsign;
 
 computeAmount();
 
-// jkl_render(annualPrimaryDues.toFixed(2), document.querySelector('#primary-dues'));
-// jkl_render(annualFamilyDues.toFixed(2), document.querySelector('#family-dues'));
-// jkl_render(tnxfee.toFixed(2), document.querySelector('#tnx-fee'));
-// jkl_render(serviceUse.toFixed(2), document.querySelector('#service-use'));
-
-// var generate_years = function () {
-//   let ele = '<label for="dues-thru">Pay Primary Dues through year: </label><select name="dues-thru" id="dues-thru" onchange="computeAmount(this)">';
-//   ele = ele + "<option value='{\"year\": 0, \"dues\": 0}'>Select</option>";
-//   yr = parseInt(currentYear)
-//   for (y of [0, 1, 2, 3, 4]) {
-//     ele = ele + ''.concat("<option value='{\"year\": ",(yr+parseInt(y)),", \"dues\": ",annualPrimaryDues*(y+1),"}'>",(yr+parseInt(y)),"</option>");
-//   }
-//   ele = ele + '</select>'
-//   return ele;
-// };
-// jkl_render(generate_years(), document.querySelector('#input-pick-years'));
 
 window.paypal
   .Buttons({
@@ -144,28 +128,11 @@ function resultMessage(message) {
   container.innerHTML = message;
 }
 
+function cancelPayment() {
+  window.location.href = "https://coastsidearc.org/www.coastsidearc.org/paypalcancel.php";
+}
+
 function computeAmount() {
-  // console.log(input1.id);
-  // switch(input.id) {
-  //   case 'tnxfee':
-  //     // code block
-  //     break;
-  //   case 'newchecked':
-  //     // code block
-  //     break;
-  //   case 'dues':
-  //     // code block
-  //     break;
-  //   case 'donation':
-  //     // code block
-  //     break;
-  //   case 'dues-thru':
-  //       // code block
-  //       // console.log(document.getElementById('dues-thru').value)
-  //       break;
-  //   default:
-  //     // code block
-  // }
   document.getElementById('amount').value = 0;
   var amt = 0;
   amt = amt + parseFloat(formData.primaryDues);
@@ -180,18 +147,5 @@ function computeAmount() {
     document.getElementById('paypal-button-container').hidden = true
   }
 
-  // let newMember = document.getElementById('newchecked').checked;
-  // if (newMember) {
-  //   var n = 12.0 - currentMonth;
-  //   console.log(n);
-  //   amt = amt - (n/12*annualPrimaryDues);
-  // }
-
-  // let payFee = document.getElementById('tnxfee').checked;
-  // if (amt > 0) {
-  //   if (payFee) {
-  //     amt = (tnxfee/100+1) * amt + serviceUse;
-  //   }
-  document.getElementById('amount').value = amt.toFixed(2);
-  // console.log(amt.toFixed(2))
+ document.getElementById('amount').value = amt.toFixed(2);
 }

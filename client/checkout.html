@@ -7,6 +7,20 @@
   <title>CARC Paypal</title>
   <style>
     label {display:inline-block;width:150px;text-align: right;}
+    .cancel-button {
+        border: 1px solid transparent;
+        border-radius: 0 3px 3px 0;
+        position: relative;
+        width: 200px;
+        height: 60px;
+        background-color: cadetblue;
+        font-size: large;
+        box-sizing: border-box;
+        border: none;
+        vertical-align: top;
+        cursor: pointer;
+        overflow: hidden;
+    }
   </style>
 </head>
 
@@ -36,14 +50,14 @@
     <input type="text" id="callsign" value="0" readonly></input>
   </p>
   <p>
-    <label for="amount">Paypal Amount: </label>
-    <input type="text" id="amount" value="0" readonly></input>
+    <label for="amount" style="color: red;">Paypal Amount: </label>
+    <input type="text" id="amount" value="0" style="color: red;" readonly></input>
   </p>
 
   <div id="paypal-button-container" hidden></div>
-  <button type="button" onClick="onCancel(this)">Cancel payment</button>
+  <button type="button" onClick="cancelPayment()" class="cancel-button">Cancel payment</button>
 
-  <p id="result-message"></p>
+  <!-- <p id="result-message"></p> -->
 
   <!-- Replace the "test" client-id value with your client-id -->
   <script
