@@ -5,8 +5,16 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>CARC Paypal</title>
+  <link href="https://www.coastsidearc.org/www.coastsidearc.org/css/Layout.css" media="all" rel="stylesheet">
+  <link href="https://www.coastsidearc.org/www.coastsidearc.org/css/index.css" media="all" rel="stylesheet">
   <style>
     label {display:inline-block;width:150px;text-align: right;}
+    .button-container {
+      width: 330px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
     .cancel-button {
         border: 1px solid transparent;
         border-radius: 0 3px 3px 0;
@@ -20,42 +28,57 @@
         vertical-align: top;
         cursor: pointer;
         overflow: hidden;
+        margin: 0;
     }
   </style>
 </head>
 
 <body>
-  <p>
-    <label for="primary-dues">Primary Dues: </label>
-    <input type="text" id="primary-dues" value="0" readonly></input>
-  </p>
-  <p>
-    <label for="associate-dues">Associate Dues: </label>
-    <input type="text" id="associate-dues" value="0" readonly></input>
-  </p>
-  <p>
-    <label for="repeater-donation">Repeater Donation: </label>
-    <input type="text" id="repeater-donation" value="0" readonly></input>
-  </p>
-  <p>
-    <label for="digipeater-donation">Digipeater Donation: </label>
-    <input type="text" id="digipeater-donation" value="0" readonly></input>
-  </p>
-  <p>
-    <label for="optional-fee">Optional Fee: </label>
-    <input type="text" id="optional-fee" value="0" readonly></input>
-  </p>
-  <p>
-    <label for="callsign">Callsign: </label>
-    <input type="text" id="callsign" value="0" readonly></input>
-  </p>
-  <p>
-    <label for="amount" style="color: red;">Paypal Amount: </label>
-    <input type="text" id="amount" value="0" style="color: red;" readonly></input>
-  </p>
+  <div style="width: 500px">
+    <img class="center" src="https://coastsidearc.org/images/shim.gif" alt="" height="10" width="780"/>
+    <img class="center" id="logo" src="https://coastsidearc.org/logo/wa6tow-logo.gif" alt="" width="135" height="135"/>
+    <img class="center" src="https://coastsidearc.org/images/shim.gif" alt="" height="10"/>
+    <br/>
+    <img class="banner" src="https://coastsidearc.org/logo/Coastside-Banner.gif" alt=""/>
+  </div>
 
-  <div id="paypal-button-container" hidden></div>
-  <button type="button" onClick="cancelPayment()" class="cancel-button">Cancel payment</button>
+  <div style="display: block; margin-left: 10%;">
+    <div style="width: 500px;">
+      <p>
+        <label for="primary-dues">Primary Dues: </label>
+        <input type="text" id="primary-dues" value="0" readonly></input>
+      </p>
+      <p>
+        <label for="associate-dues">Associate Dues: </label>
+        <input type="text" id="associate-dues" value="0" readonly></input>
+      </p>
+      <p>
+        <label for="repeater-donation">Repeater Donation: </label>
+        <input type="text" id="repeater-donation" value="0" readonly></input>
+      </p>
+      <p>
+        <label for="digipeater-donation">Digipeater Donation: </label>
+        <input type="text" id="digipeater-donation" value="0" readonly></input>
+      </p>
+      <p>
+        <label for="optional-fee">Optional Fee: </label>
+        <input type="text" id="optional-fee" value="0" readonly></input>
+      </p>
+      <p>
+        <label for="callsign">Callsign: </label>
+        <input type="text" id="callsign" value="0" readonly></input>
+      </p>
+      <p>
+        <label for="amount" style="color: red;">Paypal Amount: </label>
+        <input type="text" id="amount" value="0" style="color: red;" readonly></input>
+      </p>
+    </div>
+
+    <div id="paypal-button-container" style="width: 330px;"></div>
+    <div class="button-container">
+      <button type="button" onClick="cancelPayment()" class="cancel-button">Cancel payment</button>
+    </div>
+  </div>
 
   <!-- <p id="result-message"></p> -->
 

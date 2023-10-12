@@ -147,5 +147,5 @@ function computeAmount() {
     document.getElementById('paypal-button-container').hidden = true
   }
 
- document.getElementById('amount').value = amt.toFixed(2);
+  document.getElementById('amount').value = amt.toFixed(2);
 }
