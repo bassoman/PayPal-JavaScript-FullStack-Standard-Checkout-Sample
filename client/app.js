@@ -11,15 +11,23 @@ var formData = {
   "optionalFee": params.get("P5"),
   "callsign": params.get("P6")
 };
-document.querySelector('#primary-dues').value = parseFloat(formData.primaryDues).toFixed(2);
-document.querySelector('#associate-dues').value = parseFloat(formData.associateDues).toFixed(2);
-document.querySelector('#repeater-donation').value = parseFloat(formData.repeaterDonation).toFixed(2);
-document.querySelector('#digipeater-donation').value = parseFloat(formData.digipeaterDonation).toFixed(2);
-document.querySelector('#optional-fee').value = parseFloat(formData.optionalFee).toFixed(2);
-document.querySelector('#callsign').value = formData.callsign;
+document.querySelector('#tbl-primary-dues').innerHTML = parseFloat(formData.primaryDues).toFixed(2);
+document.querySelector('#tbl-associate-dues').innerHTML = parseFloat(formData.associateDues).toFixed(2);
+document.querySelector('#tbl-repeater-donation').innerHTML = parseFloat(formData.repeaterDonation).toFixed(2);
+document.querySelector('#tbl-digipeater-donation').innerHTML = parseFloat(formData.digipeaterDonation).toFixed(2);
+document.querySelector('#tbl-optional-fee').innerHTML = parseFloat(formData.optionalFee).toFixed(2);
+document.querySelector('#tbl-callsign').innerHTML = formData.callsign;
+
+// document.querySelector('#primary-dues').value = parseFloat(formData.primaryDues).toFixed(2);
+// document.querySelector('#associate-dues').value = parseFloat(formData.associateDues).toFixed(2);
+// document.querySelector('#repeater-donation').value = parseFloat(formData.repeaterDonation).toFixed(2);
+// document.querySelector('#digipeater-donation').value = parseFloat(formData.digipeaterDonation).toFixed(2);
+// document.querySelector('#optional-fee').value = parseFloat(formData.optionalFee).toFixed(2);
+// document.querySelector('#callsign').value = formData.callsign;
 
 computeAmount();
 
+console.log(params.toString());
 
 window.paypal
   .Buttons({
@@ -41,7 +49,7 @@ window.paypal
             cart: [
               {
                 id: "Payment",
-                quantity: document.querySelector("#amount").value,
+                quantity: document.querySelector("#tbl-amount").innerHTML,
               },
             ],
           }),
@@ -104,7 +112,7 @@ window.paypal
             orderData,
             JSON.stringify(orderData, null, 2),
           );
-          // window.location.href = "https://coastsidearc.org/www.coastsidearc.org/paypalsuccess.php";
+          actions.redirect("https://coastsidearc.org/www.coastsidearc.org/paypalsuccess.php");
         }
       } catch (error) {
         console.error(error);
@@ -113,19 +121,21 @@ window.paypal
         );
         // window.location.href = "https://coastsidearc.org/www.coastsidearc.org/paypalcancel.php";
       }
-      window.location.href = "https://coastsidearc.org/www.coastsidearc.org/paypalcancel.php";
+      // window.location.href = "https://coastsidearc.org/www.coastsidearc.org/paypalcancel.php";
     },
     onCancel(data) {
         // Show a cancel page, or return to cart
         window.location.href = "https://coastsidearc.org/www.coastsidearc.org/paypalcancel.php";
+        // window.location.href = "http://localhost:8888?" + params.toString();
     }
   })
   .render("#paypal-button-container");
 
 // Example function to show a result to the user. Your site's UI library can be used instead.
 function resultMessage(message) {
-  const container = document.querySelector("#result-message");
-  container.innerHTML = message;
+  // const container = document.querySelector("#result-message");
+  // container.innerHTML = message;
+  console.log(message);
 }
 
 function cancelPayment() {
@@ -133,7 +143,8 @@ function cancelPayment() {
 }
 
 function computeAmount() {
-  document.getElementById('amount').value = 0;
+  document.getElementById('tbl-amount').innerHTML = 0;
+  // document.getElementById('amount').value = 0;
   var amt = 0;
   amt = amt + parseFloat(formData.primaryDues);
   amt = amt + parseFloat(formData.associateDues);
@@ -147,5 +158,6 @@ function computeAmount() {
     document.getElementById('paypal-button-container').hidden = true
   }
 
-  document.getElementById('amount').value = amt.toFixed(2);
+  document.getElementById('tbl-amount').innerHTML = amt.toFixed(2);
+  // document.getElementById('amount').value = amt.toFixed(2);
 }
