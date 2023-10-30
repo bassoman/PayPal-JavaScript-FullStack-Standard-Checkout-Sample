@@ -14,10 +14,10 @@ import path from "path";
 
 // import express from "express";
 
-const { PAYPAL_CLIENT_ID, PAYPAL_CLIENT_SECRET, APP_DOMAIN, PORT = 443 } = process.env;
+const { PAYPAL_CLIENT_ID, PAYPAL_CLIENT_SECRET, KEY_PATH, CERT_PATH, PORT = 5555 } = process.env;
 var options = {
-  key: fs.readFileSync('cert/client-key.pem'),
-  cert: fs.readFileSync('cert/client-cert.pem')
+  key: fs.readFileSync(KEY_PATH),
+  cert: fs.readFileSync(CERT_PATH)
 };
 const base = "https://api-m.sandbox.paypal.com";
 const app = express();
