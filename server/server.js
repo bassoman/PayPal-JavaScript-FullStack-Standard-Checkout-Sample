@@ -11,6 +11,8 @@ import "dotenv/config";
 
 // const path = require("path");
 import path from "path";
+import bodyParser from 'body-parser';
+
 
 // import express from "express";
 
@@ -27,6 +29,7 @@ app.use(express.static("client"));
 
 // parse post params sent in body in json format
 app.use(express.json());
+app.use(bodyParser.json());
 
 /**
  * Generate an OAuth 2.0 access token for authenticating with PayPal REST APIs.
@@ -155,6 +158,19 @@ app.post("/api/orders/:orderID/capture", async (req, res) => {
   } catch (error) {
     console.error("Failed to create order:", error);
     res.status(500).json({ error: "Failed to capture order." });
+  }
+});
+
+app.post("/make_payment", async (req, res) => {
+  try {
+    // const { orderDetails } = req.params;
+    var data = req.body.data;
+    console.log(data);
+    // res.sendFile(path.resolve("./client/checkout.html"));
+    res.json(data);
+  } catch (error) {
+    console.error("Failed to make payment:", error);
+    res.status(500).json({ error: "Failed to make payment." });
   }
 });
 
